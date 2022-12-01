@@ -46,5 +46,6 @@ void TamanhoLP(ListaPala *LP); //funcao 8
 void ImprimirLP(ListaPala *LP); //funcao 6
 void ImprimirLPespecifica(ListaPala *LP, char *pl);//funcao 7
 void InstrucoesLP(void); //lista de comandos que sera exibida para o usuario
+void copiaparaodernar(ListaPala *LP); //criando uma copia para ordernacao
 
 #endif

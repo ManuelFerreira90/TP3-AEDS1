@@ -4,6 +4,7 @@
 #include "../headers/TADdicionario.h"
 #include "../headers/TADpalavra.h"
 #include "../headers/TADlinha.h"
+//#include "../headers/sort.h"
 
 //verificar se a lista esta vazia
 int ListaVaziaLP(ListaPala *LP){
@@ -192,6 +193,21 @@ void TamanhoLP(ListaPala *LP){ //funcao 8
     printf("A lista possui %d palavras.\n",LP->nroElem);
 }
 
+void copiaparaodernar(ListaPala *LP){
+    Apontador copyPTR,aux;
+    int i;
+    aux = LP->Primeiro->prox;
+    copyPTR = (Apontador)malloc(LP->nroElem*sizeof(celulapalavra));
+    for(i=0;i<LP->nroElem;i++){
+        copyPTR[i].palavra=aux->palavra;
+        aux = aux->prox;
+    }
+    for(i=0;i<LP->nroElem;i++){
+        printf("%s ",copyPTR[i].palavra.item);
+    }
+
+}
+
 
 void InstrucoesLP(void){
     printf("\nMENU:\n"
@@ -205,3 +221,5 @@ void InstrucoesLP(void){
     "8 = Imprimir letra especifica;\n"
     "9 = Finalizar.\n");
 }
+
+
