@@ -193,21 +193,6 @@ void TamanhoLP(ListaPala *LP){ //funcao 8
     printf("A lista possui %d palavras.\n",LP->nroElem);
 }
 
-void copiaparaodernar(ListaPala *LP){
-    Apontador copyPTR,aux;
-    int i;
-    aux = LP->Primeiro->prox;
-    copyPTR = (Apontador)malloc(LP->nroElem*sizeof(celulapalavra));
-    for(i=0;i<LP->nroElem;i++){
-        copyPTR[i].palavra=aux->palavra;
-        aux = aux->prox;
-    }
-    for(i=0;i<LP->nroElem;i++){
-        printf("%s ",copyPTR[i].palavra.item);
-    }
-
-}
-
 
 void InstrucoesLP(void){
     printf("\nMENU:\n"

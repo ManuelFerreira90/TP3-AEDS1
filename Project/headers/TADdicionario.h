@@ -39,5 +39,8 @@ void imprimeletradada(lista_letra *lista);
 //trasporta informacao
 void trasport(lista_letra *lista,char *palavra,int escolha);
 
+//criando uma copia para ordernacao
+void copiaparaodernar(lista_letra *let);
+
 
 #endif

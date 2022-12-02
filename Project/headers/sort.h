@@ -1,3 +1,6 @@
+#ifndef sort_h
+#define sort_h
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -180,3 +183,5 @@ void mergesort(int *v,int *vaux,int inicio,int fim){
         metodomerge(v,vaux,inicio,meio,fim);
     }
 }
+
+#endif

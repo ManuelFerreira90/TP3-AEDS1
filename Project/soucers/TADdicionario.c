@@ -3,6 +3,7 @@
 #include <string.h>
 #include "../headers/TADdicionario.h"
 #include "../headers/TADpalavra.h"
+#include "../headers/sort.h"
 
 //inicializa lista de letras
 void inicia_lista_letra(lista_letra *lista){
@@ -138,6 +139,24 @@ void trasport(lista_letra *lista,char *palavra,int escolha){
         }
     }else{
         printf("\nItem nao encontrado.\n");
+    }
+
+}
+
+void copiaparaodernar(lista_letra *let){
+    int tam;
+    ListaPala *aux;
+    celulapalavra *auxpala;
+    TPalavra *vet;
+    aux = let->primeiro->prox->Letra.Pala;
+    tam = aux->nroElem;
+    auxpala = let->primeiro->prox->Letra.Pala->Primeiro->prox;
+    printf("%d\n",tam);
+    while(auxpala!=NULL){
+        vet = malloc(tam*sizeof(TPalavra));
+        vet[0] = auxpala->palavra;
+        printf("%s\n",vet[0].item);
+        auxpala = auxpala->prox;
     }
 
 }

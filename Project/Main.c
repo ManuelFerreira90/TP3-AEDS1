@@ -4,14 +4,12 @@
 #include "../Project/headers/TADdicionario.h"
 #include "../Project/headers/TADpalavra.h"
 #include "../Project/headers/TADlinha.h"
-#include "../Project/headers/sort.h"
 
 int main(){
     lista_letra letras;
     letra let;
     ListaPala lista;
     TPalavra obj;
-    lista_letra lettt;
 
     Tlista linha;
     Titem item;
@@ -80,7 +78,7 @@ int main(){
                 fclose(TXTptr);
                 printf("Leitura realizada com sucesso.\n\n");
                 printf("\n");
-                copiaparaodernar(lettt.primeiro->Letra.Pala);
+                copiaparaodernar(&letras);
                 break;
             case 2:
                     printf("Digite a palavra para verificar: ");
