@@ -133,9 +133,8 @@ void copiaparaodernar(ListaPala *let,TPalavra *vet){
 
 //trasporta informacao(Do mein para pra o tad lista de palavras/palvra)
 void trasport(lista_letra *lista,char *palavra,int escolha){
-    int cont = 0;
+    int cont = 0,i;
     celula_letra *aux = lista->primeiro->prox;
-    int i;
 
     while(aux->Letra.letra != palavra[0] && aux->prox != NULL){
         aux = aux->prox;
@@ -182,19 +181,36 @@ void trasport(lista_letra *lista,char *palavra,int escolha){
 
 }
 
-//trasporta informacao para as funcoes de ordenacao
-void trasportsort(lista_letra *lista,char *palavra,int escolha){
-    int cont = 0;
+//ordena toda lista
+void ordena_lista(lista_letra *lista,char *palavra,int escolha){
     celula_letra *aux = lista->primeiro->prox;
-    int i;
 
-    while(aux->Letra.letra != palavra[0] && aux->prox != NULL){
+    while(aux){
+        trasportsort(lista,aux,palavra,escolha);
         aux = aux->prox;
     }
+}
 
-    if(aux->Letra.letra == palavra[0]){
+
+//trasporta informacao para as funcoes de ordenacao
+void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int escolha){
+    int cont = 0;
+    celula_letra *aux ;
+
+    if(palavra[0] != '0'){
+        aux = lista->primeiro->prox;
+        while(aux->Letra.letra != palavra[0] && aux->prox != NULL){
+            aux = aux->prox;
+        }
+
+        if(aux->Letra.letra == palavra[0]){
             cont++;
         } 
+    }
+    else{
+        aux = letra;
+        cont = 1;  //nessesario para entrar no switch
+    }
     
     if(aux->prox != NULL || cont != 0){
         switch(escolha){

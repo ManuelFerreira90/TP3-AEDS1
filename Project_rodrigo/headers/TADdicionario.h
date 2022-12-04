@@ -45,6 +45,10 @@ void Constroi_vetor(lista_letra *ll,ListaPala *lp);
 //criando uma copia para ordernacao
 void copiaparaodernar(ListaPala *let,TPalavra *vet);
 
-void trasportsort(lista_letra *lista,char *palavra,int escolha);
+//ordena toda lista
+void ordena_lista(lista_letra *lista,char *palavra,int escolha);
+
+//trasporta informacao para as funcoes de ordenacao
+void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int escolha);
 
 #endif

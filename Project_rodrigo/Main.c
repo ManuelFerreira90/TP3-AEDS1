@@ -35,7 +35,7 @@ int main(){
 
         if(escolha == 0)InstrucoesLP(); //exibe menu de escolhas
         if(escolha != 0){
-            printf("-------------------------------------\n");
+            printf("\n-------------------------------------\n");
             printf("Digite 0 caso queira ver o menu\n");
             printf("-------------------------------------\n");
         }
@@ -155,7 +155,10 @@ int main(){
                 break;
             
             case 9:
-                printf("digite a letra:");
+                printf("-----------------------------------------------\n"
+                       "Digite 0 para ordenar toda a lista\n"
+                       "Ou \nDigite a letra da lista que deseja ordenar\n"
+                       "-----------------------------------------------\n");
                 scanf("%s",pala);
                 
                 printf(
@@ -167,21 +170,25 @@ int main(){
                 "-----------------------------------\n"
                 "Digite um numero: ");
                 scanf("%d",&escolha2);
-                switch(escolha2){
-                    case 1:
-                        trasportsort(&letras,pala,escolha2);
-                        break;
-                }
-                break;
-            case 10:
-                printf("Finalizando ...\n");
+                if(pala[0] == '0'){
+                    ordena_lista(&letras,pala,escolha2);
+                }else{
+                    switch(escolha2){
+                        case 1:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                    }
+                    break;
+                case 10:
+                    printf("Finalizando ...\n");
 
-                break;
-            default:
+                    break;
+                default:
 
-                printf("Escolha invalida.\n\n");
+                    printf("Escolha invalida.\n\n");
 
-                break;
+                    break;
+            }
         }
 
     }
