@@ -28,7 +28,7 @@ void bubblesort(ListaPala *lp){
                     p++;
             }
 
-            if(vet[i].item[p]<=vet[j].item[p]){
+            if(vet[i].item[p] < vet[j].item[p]){
                 
                 aux = vet[i];
                 vet[i] = vet[j];
@@ -38,44 +38,63 @@ void bubblesort(ListaPala *lp){
         }
     }
     
-    printf("\nbubblesort:\n\n");
+    printf("\nbubblesort:\n");
     imprimir(vet,tam);
 }
 
 //insertion sort
-void insertionsort(int *v,int tam){
-    int i,j,aux;
+void insertionsort(ListaPala *lp){
+    int i,j,p=1;
+    int tam = lp->nroElem;
+    TPalavra aux;
+
+    TPalavra vet[tam];
+    copiaparaodernar(lp,vet);
+
     for(i=1;i<tam;i++){
-        aux=v[i];
+        aux = vet[i];
         j=i-1;
-        while(j>=0 && v[j]>aux){
-            v[j+1]=v[j];
+
+        while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p]))p++;
+
+        while(j>=0 && vet[j].item[p] > aux.item[p]){
+            vet[j+1] = vet[j];
             j--;
+            p = 1;
         }
-        v[j+1]=aux;
+        vet[j+1] = aux;
     }
 
-    printf("insertionsort:\n");
-   // imprimir(v, tam);
+    printf("\ninsertionsort:\n");
+    imprimir(vet, tam);
     
     return;
 }
 
 //selection sort
-void selectionsort(int *v, int tam){
-    int i,j,menor,aux;
+void selectionsort(ListaPala *lp){
+    int i,j,p=1,min;
+    int tam = lp->nroElem;
+    TPalavra aux;
+
+    TPalavra vet[tam];
+    copiaparaodernar(lp,vet);
+
     for(i=0;i<tam;i++){
-        menor=i;
+        min=i;
         for(j=i+1;j<tam;j++){
-            if(v[j]<v[menor]) menor=j;
+            while(vet[min].item[p] == vet[j].item[p] && (vet[min].item[p] && vet[j].item[p])) p++;
+            if(vet[j].item[p]<vet[min].item[p]) min=j;
+
+            p = 1;
         }
-        aux=v[menor];
-        v[menor]=v[i];
-        v[i]=aux;
+        aux=vet[min];
+        vet[min] = vet[i];
+        vet[i] = aux;
     }
 
     printf("selectionsort:\n");
-   // imprimir(v, tam);
+    imprimir(vet, tam);
     
     return;
 }

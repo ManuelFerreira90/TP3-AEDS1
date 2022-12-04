@@ -217,6 +217,13 @@ void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int esco
             case 1:
                 bubblesort(aux->Letra.Pala);
                 break;
+            
+            case 2:
+                insertionsort(aux->Letra.Pala);
+
+            case 3:
+                selectionsort(aux->Letra.Pala);
+                break;
         }
     }else{
         printf("\nItem nao encontrado.\n");

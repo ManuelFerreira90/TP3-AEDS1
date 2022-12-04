@@ -177,6 +177,22 @@ int main(){
                         case 1:
                             trasportsort(&letras,letras.utimo,pala,escolha2);
                             break;
+                        
+                        case 2:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+
+                        case 3:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                        
+                        case 4:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                        
+                        case 5:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
                     }
                     break;
                 case 10:

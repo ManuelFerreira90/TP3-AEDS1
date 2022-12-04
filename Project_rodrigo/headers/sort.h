@@ -5,8 +5,8 @@
 
 void imprimir(TPalavra *v,int tam);
 void bubblesort(ListaPala *lp);
-void insertionsort(int *v,int tam);
-void selectionsort(int *v, int tam);
+void insertionsort(ListaPala *lp);
+void selectionsort(ListaPala *lp);
 void metodoheap(int *v,int tam, int i);
 void heapsort(int *v, int tam);
 void shellsort(int *v, int tam);
