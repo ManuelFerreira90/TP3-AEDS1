@@ -1,10 +1,10 @@
 #ifndef sort_h
 #define sort_h
 
-#include "../headers/TADdicionario.h"
+#include "TADdicionario.h"
 
 void imprimir(TPalavra *v,int tam);
-void bolha(ListaPala *lp);
+void bubblesort(ListaPala *lp);
 void insertionsort(int *v,int tam);
 void selectionsort(int *v, int tam);
 void metodoheap(int *v,int tam, int i);

@@ -40,10 +40,11 @@ void imprimeletradada(lista_letra *lista);
 void trasport(lista_letra *lista,char *palavra,int escolha);
 
 //costroi vetor
-void Comstroi_vetor(lista_letra *ll,ListaPala *lp);
+void Constroi_vetor(lista_letra *ll,ListaPala *lp);
 
 //criando uma copia para ordernacao
 void copiaparaodernar(ListaPala *let,TPalavra *vet);
 
+void trasportsort(lista_letra *lista,char *palavra,int escolha);
 
 #endif

@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../Project/headers/TADdicionario.h"
-#include "../Project/headers/TADpalavra.h"
-#include "../Project/headers/TADlinha.h"
+#include "headers/TADdicionario.h"
+#include "headers/TADpalavra.h"
+#include "headers/TADlinha.h"
 
 int main(){
     lista_letra letras;
@@ -14,7 +14,7 @@ int main(){
     Tlista linha;
     Titem item;
 
-    int escolha, result;
+    int escolha, escolha2, result;
     int cont = 1, i;
     
     char linha_texto[100],pala[10];
@@ -33,12 +33,20 @@ int main(){
 
     while(escolha != 10){
 
-        InstrucoesLP(); //exibe menu de escolhas
+        if(escolha == 0)InstrucoesLP(); //exibe menu de escolhas
+        if(escolha != 0){
+            printf("-------------------------------------\n");
+            printf("Digite 0 caso queira ver o menu\n");
+            printf("-------------------------------------\n");
+        }
+        
         printf("Escolha uma opcao: ");
         scanf("%d",&escolha);
         printf("\n");
 
         switch(escolha){
+            case 0:
+                break;
             case 1:
                 printf("Lendo arquivo de texto.\n\n");
                 printf("...\n\n");
@@ -75,7 +83,7 @@ int main(){
                     }
                 }
                 fclose(TXTptr);
-                Comstroi_vetor(&letras,&lista);
+                Constroi_vetor(&letras,&lista);
                 printf("Leitura realizada com sucesso.\n\n");
                 break;
             case 2:
@@ -149,7 +157,15 @@ int main(){
             case 9:
                 printf("digite a letra:");
                 scanf("%s",pala);
-                trasport(&letras,pala,escolha);
+
+                printf("Digite a forma de ordenacao:\n"
+                "1 - bubblesort\n");
+                scanf("%d",&escolha2);
+                switch(escolha2){
+                    case 1:
+                        trasportsort(&letras,pala,escolha2);
+                        break;
+                }
                 break;
             case 10:
                 printf("Finalizando ...\n");

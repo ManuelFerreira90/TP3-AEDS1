@@ -95,7 +95,7 @@ void imprimeletradada(lista_letra *lista){
 }
 
 //cria vertores
-void Comstroi_vetor(lista_letra *ll,ListaPala *lp){
+void Constroi_vetor(lista_letra *ll,ListaPala *lp){
     celula_letra *auxL;
     celulapalavra *auxP;
     auxL = ll->primeiro->prox;
@@ -115,6 +115,21 @@ void Comstroi_vetor(lista_letra *ll,ListaPala *lp){
 
     }
 }
+
+// copia para ordenar
+void copiaparaodernar(ListaPala *let,TPalavra *vet){
+    int tam,i;
+    ListaPala *aux;
+    celulapalavra *auxpala;
+    aux = let;
+    tam = aux->nroElem;
+    
+    for(i=0;i<tam;i++){
+        vet[i] = let->Vpalavra[i];
+    }
+
+}
+
 
 //trasporta informacao(Do mein para pra o tad lista de palavras/palvra)
 void trasport(lista_letra *lista,char *palavra,int escolha){
@@ -157,9 +172,7 @@ void trasport(lista_letra *lista,char *palavra,int escolha){
 
                 ImprimirLPespecifica(aux->Letra.Pala,palavra);
                 break;
-            case 10:
-                bolha(aux->Letra.Pala);
-                break;
+            
 
 
         }
@@ -169,16 +182,27 @@ void trasport(lista_letra *lista,char *palavra,int escolha){
 
 }
 
-void copiaparaodernar(ListaPala *let,TPalavra *vet){
-    int tam,i;
-    ListaPala *aux;
-    celulapalavra *auxpala;
-    aux = let;
-    tam = aux->nroElem;
-    //vet = malloc(tam*sizeof(TPalavra));
-    
-    for(i=0;i<tam;i++){
-        vet[i] = let->Vpalavra[i];
+//trasporta informacao para as funcoes de ordenacao
+void trasportsort(lista_letra *lista,char *palavra,int escolha){
+    int cont = 0;
+    celula_letra *aux = lista->primeiro->prox;
+    int i;
+
+    while(aux->Letra.letra != palavra[0] && aux->prox != NULL){
+        aux = aux->prox;
     }
 
+    if(aux->Letra.letra == palavra[0]){
+            cont++;
+        } 
+    
+    if(aux->prox != NULL || cont != 0){
+        switch(escolha){
+            case 1:
+                bubblesort(aux->Letra.Pala);
+                break;
+        }
+    }else{
+        printf("\nItem nao encontrado.\n");
+    }
 }

@@ -14,7 +14,7 @@ void imprimir(TPalavra *v,int tam){
 }
 
 //bubbler sort
-void bolha(ListaPala *lp){
+void bubblesort(ListaPala *lp){
     int i,j,p=1;
     int tam = lp->nroElem;
     TPalavra aux ;
@@ -27,7 +27,7 @@ void bolha(ListaPala *lp){
             while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p])){
                     p++;
             }
-            printf("%d",p);
+
             if(vet[i].item[p]<=vet[j].item[p]){
                 
                 aux = vet[i];
@@ -38,7 +38,7 @@ void bolha(ListaPala *lp){
         }
     }
     
-    printf("\nbubblesort:\n");
+    printf("\nbubblesort:\n\n");
     imprimir(vet,tam);
 }
 
