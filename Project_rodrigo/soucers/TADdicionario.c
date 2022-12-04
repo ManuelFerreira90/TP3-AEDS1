@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "../headers/TADdicionario.h"
 #include "../headers/TADpalavra.h"
 #include "../headers/sort.h"
+
+
 
 //inicializa lista de letras
 void inicia_lista_letra(lista_letra *lista){
@@ -183,12 +186,22 @@ void trasport(lista_letra *lista,char *palavra,int escolha){
 
 //ordena toda lista
 void ordena_lista(lista_letra *lista,char *palavra,int escolha){
+    clock_t start, end;
+    double time;
     celula_letra *aux = lista->primeiro->prox;
 
+    start = clock();
     while(aux){
         trasportsort(lista,aux,palavra,escolha);
         aux = aux->prox;
     }
+    end = clock();
+
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf(
+        "\n-------------------------------------------\n"
+        "tempo de execucao total: %f seg\n"
+        "-------------------------------------------\n",time);
 }
 
 
@@ -220,6 +233,7 @@ void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int esco
             
             case 2:
                 insertionsort(aux->Letra.Pala);
+                break;
 
             case 3:
                 selectionsort(aux->Letra.Pala);

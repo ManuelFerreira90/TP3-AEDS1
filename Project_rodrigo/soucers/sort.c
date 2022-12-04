@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "../headers/sort.h"
+
+clock_t start, end;
 
 
 //imprimir elementos
@@ -21,7 +24,9 @@ void bubblesort(ListaPala *lp){
 
     TPalavra vet[tam];
     copiaparaodernar(lp,vet);
-
+    
+    double time;
+    start = clock();
     for(i=0;i<tam;i++){
         for(j=0;j<tam;j++){
             while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p])){
@@ -37,20 +42,26 @@ void bubblesort(ListaPala *lp){
             }p=1;
         }
     }
+    end = clock();
     
     printf("\nbubblesort:\n");
     imprimir(vet,tam);
+
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de execucao: %f seg\n",time);
 }
 
 //insertion sort
 void insertionsort(ListaPala *lp){
     int i,j,p=1;
     int tam = lp->nroElem;
+    double time;
     TPalavra aux;
 
     TPalavra vet[tam];
     copiaparaodernar(lp,vet);
 
+    start = clock();
     for(i=1;i<tam;i++){
         aux = vet[i];
         j=i-1;
@@ -64,17 +75,20 @@ void insertionsort(ListaPala *lp){
         }
         vet[j+1] = aux;
     }
+    end = clock();
 
     printf("\ninsertionsort:\n");
     imprimir(vet, tam);
-    
-    return;
+
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("tempo de execucao: %f",time);
 }
 
 //selection sort
 void selectionsort(ListaPala *lp){
     int i,j,p=1,min;
     int tam = lp->nroElem;
+    double time;
     TPalavra aux;
 
     TPalavra vet[tam];
@@ -96,7 +110,8 @@ void selectionsort(ListaPala *lp){
     printf("selectionsort:\n");
     imprimir(vet, tam);
     
-    return;
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("tempo de execucao: %f",time);
 }
 
 //heap sort
