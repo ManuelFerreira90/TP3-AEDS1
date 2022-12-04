@@ -157,9 +157,15 @@ int main(){
             case 9:
                 printf("digite a letra:");
                 scanf("%s",pala);
-
-                printf("Digite a forma de ordenacao:\n"
-                "1 - bubblesort\n");
+                
+                printf(
+              "\n-----------------------------------\n"
+                "Menu de ordenacao:\n"
+                "1 - bubblesort       4 - heapsort\n"
+                "2 - insertionsort    5 - quicksort\n"
+                "3 - selectionsort \n"
+                "-----------------------------------\n"
+                "Digite um numero: ");
                 scanf("%d",&escolha2);
                 switch(escolha2){
                     case 1:
