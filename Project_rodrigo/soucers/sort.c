@@ -48,7 +48,7 @@ void bubblesort(ListaPala *lp){
     imprimir(vet,tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de execucao: %f seg\n",time);
+    printf("tempo de execução: %f seg\n",time);
 }
 
 //insertion sort
@@ -67,14 +67,14 @@ void insertionsort(ListaPala *lp){
     for(i=1;i<tam;i++){
         aux = vet[i];
         j=i-1;
-
-        while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p]))p++;
-
+        while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
         while(j>=0 && vet[j].item[p] > aux.item[p]){
             vet[j+1] = vet[j];
             j--;
-            p = 1;
-        }
+            p=1;
+            while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
+        }p=1;
+
         vet[j+1] = aux;
     }
     end = clock();
@@ -83,7 +83,7 @@ void insertionsort(ListaPala *lp){
     imprimir(vet, tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("tempo de execucao: %f\n",time);
+    printf("tempo de execução: %f\n",time);
 }
 
 //selection sort
@@ -113,42 +113,87 @@ void selectionsort(ListaPala *lp){
     }
     end = clock();
 
-    printf("s\nelectionsort:\n");
+    printf("\nselectionsort:\n");
     imprimir(vet, tam);
     
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("tempo de execucao: %f\n",time);
+    printf("tempo de execução: %f\n",time);
 }
 
 //heap sort
-void metodoheap(int *v,int tam, int i){
-    int raiz = i, esquerda = (2*i)+1, direita = (2*i)+2,aux;
-    if(esquerda < tam && v[esquerda] > v[raiz]) raiz = esquerda;
-    if(direita < tam && v[direita] > v[raiz]) raiz = direita;
-    if(raiz!=i){
-        aux=v[i];
-        v[i]=v[raiz];
-        v[raiz]=aux;
-        metodoheap(v,tam,raiz);
+void Refaz(int Esq, int Dir, TPalavra *vet){
+    int p = 1;
+    int j = Esq * 2;
+    TPalavra aux = vet[Esq];
+
+    while (j <= Dir){
+        while(vet[j].item[p] == vet[j+1].item[p] && (vet[j].item[p] && vet[j+1].item[p]))p++;
+        if ((j < Dir)&&(vet[j].item[p] < vet[j+1].item[p])) j++;
+        
+        p=1;
+        while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
+        if (aux.item[p] >= vet[j].item[p]) break;
+        
+        p=1;
+        
+        vet[Esq] = vet[j];
+        Esq = j; j = Esq * 2 ;
+
+    }
+    vet[Esq] = aux;
+}
+
+void Constroi(TPalavra *vet, int *n){
+    int Esq;
+    Esq = *n / 2 + 1;
+    while (Esq > 1){
+        Esq--;
+        Refaz(Esq, *n, vet);
     }
 }
 
-void heapsort(int *v, int tam){
-    int i,j,aux;
-    for(i=tam/2-1;i>=0;i--){
-        metodoheap(v,tam,i);
+
+
+void Heapsort(ListaPala *lp){ 
+    clock_t start, end;
+    double time;
+    int Esq, Dir,i;
+    int tam = lp->nroElem;
+    TPalavra aux;
+
+    TPalavra vet[tam+1];
+//-----------------------copia o vetor---------------------------------    
+    int tam1;
+    ListaPala *aux1;
+    celulapalavra *auxpala;
+    
+    aux1 = lp;
+    tam1 = aux1->nroElem;
+    
+    
+    for(i=1;i<tam1+1;i++){
+        vet[i] = lp->Vpalavra[i-1];
     }
-    for(j=tam-1;j>0;j--){
-        aux = v[0];
-        v[0] = v[j];
-        v[j] = aux;
-        metodoheap(v,j,0);
+//----------------------------------------------------------------------
+    
+    start = clock();
+    Constroi(vet, &tam); /* constroi o heap */
+    Esq = 1; Dir = tam;
+    
+    while (Dir > 1){ /* ordena o vetor */
+        aux = vet[1]; vet[1] = vet[Dir]; vet[Dir] = aux;
+        Dir--;
+        Refaz(Esq, Dir, vet);
+    }
+    end = clock();
+
+    printf("\nHeapsort:\n");
+    for(i=1;i<tam+1;i++){
+        printf("%s\n\n",vet[i].item);;
     }
 
-    printf("heapsort:\n");
-    //imprimir(v, tam);
-
-    return;
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("tempo de execuçao: %f\n",time);
 }
 
 //shell sort 
@@ -164,12 +209,13 @@ void shellsort(ListaPala *lp){
     copiaparaodernar(lp,vet);
     
     start = clock();
-    if(sizeof(vet) < 1){
+    
         while(h<tam){
             h=h*3+1;
         }
-        
+
         do{
+            if(tam == 1)break;
             h = h / 3;
             for(i=h;i<tam;i++){
                 aux = vet[i];
@@ -179,21 +225,18 @@ void shellsort(ListaPala *lp){
                 while(vet[j-h].item[p] == aux.item[p] && (vet[j-h].item[p] && aux.item[p])) p++; 
                 
                 while(vet[j-h].item[p] > aux.item[p]){  
-                    
                     vet[j] = vet[j-h];
-                    
                     j = j-h;
-                    if(j>=h){
-                        p=1;
-                        while(vet[j-h].item[p] == aux.item[p] && (vet[j-h].item[p] && aux.item[p])) p++;
-                    }
+                    
+                    p=1;
+                    while(vet[j-h].item[p] == aux.item[p] && (vet[j-h].item[p] && aux.item[p])) p++;
+                    
                     if(j < h)break;
                 }
                 p=1;
                 vet[j] = aux;
             } 
         }while(h != 1);
-    }
     end = clock();
         
 
@@ -201,26 +244,33 @@ void shellsort(ListaPala *lp){
     imprimir(vet, tam);
 
     time = (double)(end - start) /CLOCKS_PER_SEC;
-    printf("tempo de execucao: %f\n",time);
+    printf("tempo de execução: %f\n",time);
     
     return;
 }
 
-//quicksort ****nao******
-void particaoQ(int esq, int dir, int *j, int *i,TPalavra *vet){
-    int p=1,q=1;
+//quicksort 
+void particaoQ(int esq, int dir, int *i, int *j,TPalavra *vet){
+    int p=1;
     TPalavra pivo,aux;
     *i = esq; *j = dir;
     pivo = vet[(*i+*j)/2];
 
     do{
-        //while(vet[*i].item[p] == pivo.item[p] && (vet[*i].item[p] && pivo.item[p])) p++; 
-        while (pivo.item[p] > vet[*i].item[p]) (*i)++;
+        while(vet[*i].item[p] == pivo.item[1] && (vet[*i].item[p] && pivo.item[1])) p++; 
+        while (pivo.item[p] > vet[*i].item[p]){
+            (*i)++;
+            p=1;
+            while(vet[*i].item[p] == pivo.item[1] && (vet[*i].item[p] && pivo.item[1])) p++;
+            }p=1;
         
-        //while(vet[*j].item[q] == pivo.item[q] && (vet[*j].item[q] && pivo.item[q])) q++; 
-        while (pivo.item[q] < vet[*j].item[q]) (*j)--;
-
-        printf("%d %d %s,",*i,*j,pivo.item);
+        while(vet[*j].item[p] == pivo.item[p] && (vet[*j].item[p] && pivo.item[p])) p++; 
+        while (pivo.item[p] < vet[*j].item[p]){
+            (*j)--;
+            p=1;
+            while(vet[*j].item[p] == pivo.item[p] && (vet[*j].item[p] && pivo.item[p])) p++;
+            }p=1;
+        
         if (*i <= *j){
             aux = vet[*i]; 
             vet[*i] = vet[*j]; 
@@ -237,48 +287,27 @@ void ordenaQ(int esq, int dir, TPalavra *vet){
     int i,j;
 
     particaoQ(esq,dir,&i,&j,vet);
-    //if(esq < j)ordenaQ(esq,j,vet);
-    //if(i < dir)ordenaQ(i,dir,vet);
+
+    if(esq < j)ordenaQ(esq,j,vet);
+    if(i < dir)ordenaQ(i,dir,vet);
 }
 
 
 void quicksort(ListaPala *lp){
-    int esq = 1;
-    int dir = lp->nroElem-1;
+    clock_t start,end;
+    double time;
     int tam = lp->nroElem;
     
     TPalavra vet[tam];
     copiaparaodernar(lp,vet);
 
-    ordenaQ(esq,dir,vet);
+    start = clock();
+    ordenaQ(0,tam-1,vet);
+    end = clock();
 
+    printf("\nQicksort:\n");
     imprimir(vet,tam);
+
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("tempo de execução: %f",time);
 }
-
-
-//merge sort
-void metodomerge(int *v,int *vaux,int inicio,int meio, int fim){
-    int i,j=0,k=0;
-    for(i=inicio;i<=fim;i++) vaux[i] = v[i];
-    j=inicio;
-    k=meio+1;
-    for(i=inicio;i<=fim;i++){
-    	if(j>meio) v[i] = vaux[k++];
-    	else if(k>fim) v[i] =vaux[j++];
-    	else if(vaux[j] < vaux[k]) v[i] = vaux[j++];
-    	else v[i] = vaux[k++]; 
-    }	
-    
-    return;
-}
-
-void mergesort(int *v,int *vaux,int inicio,int fim){
-    int meio;
-    if(inicio < fim){
-        meio = (inicio + fim)/2;
-        mergesort(v,vaux,inicio,meio);
-        mergesort(v,vaux,meio+1,fim);
-        metodomerge(v,vaux,inicio,meio,fim);
-    }
-}
-

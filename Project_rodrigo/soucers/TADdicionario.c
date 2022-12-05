@@ -124,6 +124,7 @@ void copiaparaodernar(ListaPala *let,TPalavra *vet){
     int tam,i;
     ListaPala *aux;
     celulapalavra *auxpala;
+    
     aux = let;
     tam = aux->nroElem;
     
@@ -235,6 +236,10 @@ void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int esco
 
             case 3:
                 selectionsort(aux->Letra.Pala);
+                break;
+
+            case 4:
+                Heapsort(aux->Letra.Pala);
                 break;
             
             case 5:
