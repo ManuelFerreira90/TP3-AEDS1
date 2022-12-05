@@ -14,7 +14,7 @@ void imprimir(TPalavra *v,int tam){
     printf("\n");
 }
 
-//bubbler sort
+//---------------------------------------bubbler sort-----------------------------------------------------
 void bubblesort(ListaPala *lp){
     clock_t start, end;
 
@@ -50,8 +50,9 @@ void bubblesort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("tempo de execução: %f seg\n",time);
 }
+//----------------------------------------------------------------------------------------------------------
 
-//insertion sort
+//---------------------------------------insertion sort----------------------------------------------------
 void insertionsort(ListaPala *lp){
     clock_t start, end;
 
@@ -85,8 +86,9 @@ void insertionsort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("tempo de execução: %f\n",time);
 }
+//---------------------------------------------------------------------------------------------------------
 
-//selection sort
+//-------------------------------------selection sort-----------------------------------------------------
 void selectionsort(ListaPala *lp){
     clock_t start, end;
 
@@ -119,8 +121,9 @@ void selectionsort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("tempo de execução: %f\n",time);
 }
+//---------------------------------------------------------------------------------------------------------
 
-//heap sort
+//----------------------------------------heap sort-------------------------------------------------------
 void Refaz(int Esq, int Dir, TPalavra *vet){
     int p = 1;
     int j = Esq * 2;
@@ -162,7 +165,7 @@ void Heapsort(ListaPala *lp){
     TPalavra aux;
 
     TPalavra vet[tam+1];
-//-----------------------copia o vetor---------------------------------    
+//*************************copia o vetor*********************************   
     int tam1;
     ListaPala *aux1;
     celulapalavra *auxpala;
@@ -174,7 +177,7 @@ void Heapsort(ListaPala *lp){
     for(i=1;i<tam1+1;i++){
         vet[i] = lp->Vpalavra[i-1];
     }
-//----------------------------------------------------------------------
+//************************************************************************
     
     start = clock();
     Constroi(vet, &tam); /* constroi o heap */
@@ -195,8 +198,9 @@ void Heapsort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("tempo de execuçao: %f\n",time);
 }
+//---------------------------------------------------------------------------------------------------------
 
-//shell sort 
+//------------------------------------shell sort---------------------------------------------------------- 
 void shellsort(ListaPala *lp){
     clock_t start, end;
 
@@ -248,8 +252,9 @@ void shellsort(ListaPala *lp){
     
     return;
 }
+//--------------------------------------------------------------------------------------------------------
 
-//quicksort 
+//----------------------------quicksort------------------------------------------------------------------- 
 void particaoQ(int esq, int dir, int *i, int *j,TPalavra *vet){
     int p=1;
     TPalavra pivo,aux;
@@ -311,3 +316,4 @@ void quicksort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("tempo de execução: %f",time);
 }
+//---------------------------------------------------------------------------------------------------------------
