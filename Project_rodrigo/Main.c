@@ -165,8 +165,8 @@ int main(){
               "\n-----------------------------------\n"
                 "Menu de ordenacao:\n"
                 "1 - bubblesort       4 - heapsort\n"
-                "2 - insertionsort    5 - quicksort\n"
-                "3 - selectionsort \n"
+                "2 - insertionsort    5 - shellsort\n"
+                "3 - selectionsort    6 - quicksort\n"
                 "-----------------------------------\n"
                 "Digite um numero: ");
                 scanf("%d",&escolha2);
@@ -191,6 +191,9 @@ int main(){
                             break;
                         
                         case 5:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                        case 6:
                             trasportsort(&letras,letras.utimo,pala,escolha2);
                             break;
                     }

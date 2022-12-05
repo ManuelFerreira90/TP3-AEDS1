@@ -175,8 +175,6 @@ void trasport(lista_letra *lista,char *palavra,int escolha){
                 ImprimirLPespecifica(aux->Letra.Pala,palavra);
                 break;
             
-
-
         }
     }else{
         printf("\nItem nao encontrado.\n");
@@ -237,6 +235,14 @@ void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int esco
 
             case 3:
                 selectionsort(aux->Letra.Pala);
+                break;
+            
+            case 5:
+                shellsort(aux->Letra.Pala);
+                break;
+            
+            case 6:
+                quicksort(aux->Letra.Pala);
                 break;
         }
     }else{

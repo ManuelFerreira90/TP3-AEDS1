@@ -9,9 +9,10 @@ void insertionsort(ListaPala *lp);
 void selectionsort(ListaPala *lp);
 void metodoheap(int *v,int tam, int i);
 void heapsort(int *v, int tam);
-void shellsort(int *v, int tam);
-int metodoquicksort(int *v,int left,int right);
-void quicksort(int *v,int left,int right);
+void shellsort(ListaPala *lp);
+void particaoQ(int esq, int dir, int *j, int *i,TPalavra *vet);
+void ordenaQ(int esq, int dir, TPalavra *vet);
+void quicksort(ListaPala *lp);
 void metodomerge(int *v,int *vaux,int inicio,int meio, int fim);
 
 #endif

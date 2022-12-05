@@ -4,8 +4,6 @@
 #include <time.h>
 #include "../headers/sort.h"
 
-clock_t start, end;
-
 
 //imprimir elementos
 void imprimir(TPalavra *v,int tam){
@@ -18,6 +16,8 @@ void imprimir(TPalavra *v,int tam){
 
 //bubbler sort
 void bubblesort(ListaPala *lp){
+    clock_t start, end;
+
     int i,j,p=1;
     int tam = lp->nroElem;
     TPalavra aux ;
@@ -53,6 +53,8 @@ void bubblesort(ListaPala *lp){
 
 //insertion sort
 void insertionsort(ListaPala *lp){
+    clock_t start, end;
+
     int i,j,p=1;
     int tam = lp->nroElem;
     double time;
@@ -81,11 +83,13 @@ void insertionsort(ListaPala *lp){
     imprimir(vet, tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("tempo de execucao: %f",time);
+    printf("tempo de execucao: %f\n",time);
 }
 
 //selection sort
 void selectionsort(ListaPala *lp){
+    clock_t start, end;
+
     int i,j,p=1,min;
     int tam = lp->nroElem;
     double time;
@@ -94,11 +98,12 @@ void selectionsort(ListaPala *lp){
     TPalavra vet[tam];
     copiaparaodernar(lp,vet);
 
+    start = clock();
     for(i=0;i<tam;i++){
         min=i;
         for(j=i+1;j<tam;j++){
             while(vet[min].item[p] == vet[j].item[p] && (vet[min].item[p] && vet[j].item[p])) p++;
-            if(vet[j].item[p]<vet[min].item[p]) min=j;
+            if(vet[j].item[p]<vet[min].item[p]) min = j;
 
             p = 1;
         }
@@ -106,12 +111,13 @@ void selectionsort(ListaPala *lp){
         vet[min] = vet[i];
         vet[i] = aux;
     }
+    end = clock();
 
-    printf("selectionsort:\n");
+    printf("s\nelectionsort:\n");
     imprimir(vet, tam);
     
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("tempo de execucao: %f",time);
+    printf("tempo de execucao: %f\n",time);
 }
 
 //heap sort
@@ -145,63 +151,110 @@ void heapsort(int *v, int tam){
     return;
 }
 
-//shell sort
-void shellsort(int *v, int tam){
-    int h,i,var,j;
-    while(h<tam){
-        h=h*3+1;
-    }
-    h = h / 3;
-    while(h>0){
-        for(i=h;i<tam;i++){
-            var = v[i];
-            j = i;
-            while(j>=h && v[j-h]>var){
-                v[j] = v[j-h];
-                j = j-h; 
-            }
-            v[j]=var;
+//shell sort 
+void shellsort(ListaPala *lp){
+    clock_t start, end;
+
+    int h,i,var,j,p=1;
+    int tam = lp->nroElem;
+    double time;
+    TPalavra aux;
+
+    TPalavra vet[tam];
+    copiaparaodernar(lp,vet);
+    
+    start = clock();
+    if(sizeof(vet) < 1){
+        while(h<tam){
+            h=h*3+1;
         }
-        h=h/2;
-    }    
-
-    printf("shellsort:\n");
-    //imprimir(v, tam);
-    
-    return;
-}
-
-//quicksort
-int metodoquicksort(int *v,int left,int right){
-    int meio = (left + right) / 2;
-    int i = left - 1;
-    int j = right + 1;
-    int pivo = v[meio],aux;
-    while(1){
-        do{
-            i++;
-        }while(v[i]<pivo);
-        do{
-            j--;
-        }while(v[j]>pivo);
-        if(i>=j) return j;
-        aux = v[i];
-        v[i] = v[j];
-        v[j] = aux;
         
-    }
-}
+        do{
+            h = h / 3;
+            for(i=h;i<tam;i++){
+                aux = vet[i];
+                j = i;
 
-void quicksort(int *v,int left,int right){
-    int var;
-    if(left < right){
-        var = metodoquicksort(v,left,right);
-        quicksort(v,left,var);
-        quicksort(v,var+1,right);
+
+                while(vet[j-h].item[p] == aux.item[p] && (vet[j-h].item[p] && aux.item[p])) p++; 
+                
+                while(vet[j-h].item[p] > aux.item[p]){  
+                    
+                    vet[j] = vet[j-h];
+                    
+                    j = j-h;
+                    if(j>=h){
+                        p=1;
+                        while(vet[j-h].item[p] == aux.item[p] && (vet[j-h].item[p] && aux.item[p])) p++;
+                    }
+                    if(j < h)break;
+                }
+                p=1;
+                vet[j] = aux;
+            } 
+        }while(h != 1);
     }
+    end = clock();
+        
+
+    printf("\nshellsort:\n");
+    imprimir(vet, tam);
+
+    time = (double)(end - start) /CLOCKS_PER_SEC;
+    printf("tempo de execucao: %f\n",time);
     
     return;
 }
+
+//quicksort ****nao******
+void particaoQ(int esq, int dir, int *j, int *i,TPalavra *vet){
+    int p=1,q=1;
+    TPalavra pivo,aux;
+    *i = esq; *j = dir;
+    pivo = vet[(*i+*j)/2];
+
+    do{
+        //while(vet[*i].item[p] == pivo.item[p] && (vet[*i].item[p] && pivo.item[p])) p++; 
+        while (pivo.item[p] > vet[*i].item[p]) (*i)++;
+        
+        //while(vet[*j].item[q] == pivo.item[q] && (vet[*j].item[q] && pivo.item[q])) q++; 
+        while (pivo.item[q] < vet[*j].item[q]) (*j)--;
+
+        printf("%d %d %s,",*i,*j,pivo.item);
+        if (*i <= *j){
+            aux = vet[*i]; 
+            vet[*i] = vet[*j]; 
+            vet[*j] = aux;
+            (*i)++; (*j)--;
+            
+        }
+        
+    }while (*i <= *j);
+}
+
+
+void ordenaQ(int esq, int dir, TPalavra *vet){
+    int i,j;
+
+    particaoQ(esq,dir,&i,&j,vet);
+    //if(esq < j)ordenaQ(esq,j,vet);
+    //if(i < dir)ordenaQ(i,dir,vet);
+}
+
+
+void quicksort(ListaPala *lp){
+    int esq = 1;
+    int dir = lp->nroElem-1;
+    int tam = lp->nroElem;
+    
+    TPalavra vet[tam];
+    copiaparaodernar(lp,vet);
+
+    ordenaQ(esq,dir,vet);
+
+    imprimir(vet,tam);
+}
+
 
 //merge sort
 void metodomerge(int *v,int *vaux,int inicio,int meio, int fim){
