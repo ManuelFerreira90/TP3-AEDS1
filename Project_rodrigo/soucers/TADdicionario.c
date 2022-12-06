@@ -120,7 +120,7 @@ void Constroi_vetor(lista_letra *ll,ListaPala *lp){
 }
 
 // copia para ordenar
-void copiaparaodernar(ListaPala *let,TPalavra *vet){
+void copiaparaodernar(ListaPala *let, TPalavra *vet){
     int tam,i;
     ListaPala *aux;
     celulapalavra *auxpala;
@@ -205,7 +205,7 @@ void ordena_lista(lista_letra *lista,char *palavra,int escolha){
 
 
 //trasporta informacao para as funcoes de ordenacao
-void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int escolha){
+void trasportsort(lista_letra *lista, celula_letra *letra, char *palavra, int escolha){
     int cont = 0;
     celula_letra *aux ;
 
