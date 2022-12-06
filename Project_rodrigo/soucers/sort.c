@@ -6,7 +6,7 @@
 
 
 //imprimir elementos
-void imprimir(TPalavra *v,int tam){
+void imprimir(TPalavra *v, int tam){
     int i;
     for(i=0;i<tam;i++){
         printf("%s\n",v[i].item);
@@ -14,41 +14,54 @@ void imprimir(TPalavra *v,int tam){
     printf("\n");
 }
 
-//---------------------------------------bubbler sort-----------------------------------------------------
+//---------------------------------------bubble sort-----------------------------------------------------
 void bubblesort(ListaPala *lp){
     clock_t start, end;
 
-    int i,j,p=1;
+    int i, j, p=1, comp=0, mov=0;
     int tam = lp->nroElem;
-    TPalavra aux ;
+    TPalavra aux;
 
     TPalavra vet[tam];
-    copiaparaodernar(lp,vet);
+    copiaparaodernar(lp, vet);
     
     double time;
     start = clock();
-    for(i=0;i<tam;i++){
-        for(j=0;j<tam;j++){
-            while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p])){
-                    p++;
+    
+    for(int a = 0; a < tam; a++){//Bobble_sort
+        for(int j = a+1; j < tam; j++){
+            comp++;
+            if(strcmp(vet[a].item, vet[j].item) > 0){ //0 se forem iguais, <0 se st1<st2 e >0 se st1>st2.
+                strcpy(aux.item, vet[a].item);
+                strcpy(vet[a].item, vet[j].item);
+                strcpy(vet[j].item, aux.item);
+                mov += 2;
             }
+        }
+    }
 
+    /*for(i=0;i<tam;i++){
+        for(j=0;j<tam;j++){
+            while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p])) p++;
+
+            comp++; //Conta o numero de comparações
             if(vet[i].item[p] < vet[j].item[p]){
                 
                 aux = vet[i];
                 vet[i] = vet[j];
                 vet[j] = aux;
-                
+                mov++; //Conta o número de movimentações
             }p=1;
         }
-    }
+    }*/
     end = clock();
     
     printf("\nbubblesort:\n");
-    imprimir(vet,tam);
+    imprimir(vet, tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("tempo de execução: %f seg\n",time);
+    printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
+    printf("Tempo de execução: %f seg\n",time);
 }
 //----------------------------------------------------------------------------------------------------------
 
@@ -56,34 +69,48 @@ void bubblesort(ListaPala *lp){
 void insertionsort(ListaPala *lp){
     clock_t start, end;
 
-    int i,j,p=1;
+    int i, j, p=1, comp=0, mov=0;
     int tam = lp->nroElem;
     double time;
     TPalavra aux;
 
     TPalavra vet[tam];
-    copiaparaodernar(lp,vet);
+    copiaparaodernar(lp, vet);
 
     start = clock();
-    for(i=1;i<tam;i++){
-        aux = vet[i];
-        j=i-1;
-        while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
-        while(j>=0 && vet[j].item[p] > aux.item[p]){
-            vet[j+1] = vet[j];
-            j--;
-            p=1;
-            while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
-        }p=1;
 
-        vet[j+1] = aux;
+    for(i = 1; i <= tam; i++){
+        strcpy(aux.item, vet[i].item);
+        j = i-1;
+        while(j >= 0 && strcmp(aux.item, vet[j].item) < 0){
+            strcpy(vet[j+1].item, vet[j].item);
+            j--;
+            comp++;
+        }
+        strcpy(vet[j+1].item, aux.item);
+        mov++;
     }
+
+    // for(i=1;i<tam;i++){
+    //     aux = vet[i];
+    //     j=i-1;
+    //     while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
+    //     while(j>=0 && vet[j].item[p] > aux.item[p]){
+    //         vet[j+1] = vet[j];
+    //         j--;
+    //         p=1;
+    //         while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
+    //     }p=1;
+
+    //     vet[j+1] = aux;
+    // }
     end = clock();
 
     printf("\ninsertionsort:\n");
-    imprimir(vet, tam);
+    imprimir(vet, tam+1);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("tempo de execução: %f\n",time);
 }
 //---------------------------------------------------------------------------------------------------------
@@ -92,16 +119,29 @@ void insertionsort(ListaPala *lp){
 void selectionsort(ListaPala *lp){
     clock_t start, end;
 
-    int i,j,p=1,min;
+    int i, j, p=1, min, comp=0, mov=0;
     int tam = lp->nroElem;
     double time;
     TPalavra aux;
 
     TPalavra vet[tam];
-    copiaparaodernar(lp,vet);
+    copiaparaodernar(lp, vet);
 
     start = clock();
-    for(i=0;i<tam;i++){
+
+    for(i = 0; i < tam; i++){ //select_sort
+        min = i;
+        for(j = i + 1; j < tam; j++){
+            comp++; //Conta a quantidade de comparacoes
+            if(strcmp(vet[j].item, vet[min].item) < 0) min = j;//0 se forem iguais, <0 se st1<st2 e >0 se st1>st2.
+        }
+        strcpy(aux.item, vet[min].item);
+        strcpy(vet[min].item, vet[i].item);
+        strcpy(vet[i].item, aux.item);
+        mov++; //Conta a quantidade de mivimentacoes
+    }
+
+    /*for(i=0;i<tam;i++){
         min=i;
         for(j=i+1;j<tam;j++){
             while(vet[min].item[p] == vet[j].item[p] && (vet[min].item[p] && vet[j].item[p])) p++;
@@ -112,13 +152,14 @@ void selectionsort(ListaPala *lp){
         aux=vet[min];
         vet[min] = vet[i];
         vet[i] = aux;
-    }
+    }*/
     end = clock();
 
     printf("\nselectionsort:\n");
     imprimir(vet, tam);
     
     time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("tempo de execução: %f\n",time);
 }
 //---------------------------------------------------------------------------------------------------------
@@ -316,4 +357,4 @@ void quicksort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("tempo de execução: %f",time);
 }
-//---------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------
