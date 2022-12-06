@@ -28,7 +28,7 @@ void bubblesort(ListaPala *lp){
     double time;
     start = clock();
     
-    for(int a = 0; a < tam; a++){//Bobble_sort
+    /*for(int a = 0; a < tam; a++){//Bobble_sort
         for(int j = a+1; j < tam; j++){
             comp++;
             if(strcmp(vet[a].item, vet[j].item) > 0){ //0 se forem iguais, <0 se st1<st2 e >0 se st1>st2.
@@ -38,9 +38,9 @@ void bubblesort(ListaPala *lp){
                 mov += 2;
             }
         }
-    }
+    }*/
 
-    /*for(i=0;i<tam;i++){
+    for(i=0;i<tam;i++){
         for(j=0;j<tam;j++){
             while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p])) p++;
 
@@ -53,7 +53,8 @@ void bubblesort(ListaPala *lp){
                 mov++; //Conta o número de movimentações
             }p=1;
         }
-    }*/
+    }
+
     end = clock();
     
     printf("\nbubblesort:\n");
@@ -79,7 +80,7 @@ void insertionsort(ListaPala *lp){
 
     start = clock();
 
-    for(i = 1; i <= tam; i++){
+    /*for(i = 1; i <= tam; i++){
         strcpy(aux.item, vet[i].item);
         j = i-1;
         while(j >= 0 && strcmp(aux.item, vet[j].item) < 0){
@@ -89,21 +90,21 @@ void insertionsort(ListaPala *lp){
         }
         strcpy(vet[j+1].item, aux.item);
         mov++;
+    }*/
+
+    for(i=1;i<tam;i++){
+        aux = vet[i];
+        j=i-1;
+        while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
+        while(j>=0 && vet[j].item[p] > aux.item[p]){
+            vet[j+1] = vet[j];
+            j--;
+            p=1;
+            while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
+        }p=1;
+
+        vet[j+1] = aux;
     }
-
-    // for(i=1;i<tam;i++){
-    //     aux = vet[i];
-    //     j=i-1;
-    //     while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
-    //     while(j>=0 && vet[j].item[p] > aux.item[p]){
-    //         vet[j+1] = vet[j];
-    //         j--;
-    //         p=1;
-    //         while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
-    //     }p=1;
-
-    //     vet[j+1] = aux;
-    // }
     end = clock();
 
     printf("\ninsertionsort:\n");
@@ -129,7 +130,7 @@ void selectionsort(ListaPala *lp){
 
     start = clock();
 
-    for(i = 0; i < tam; i++){ //select_sort
+    /*for(i = 0; i < tam; i++){ //select_sort
         min = i;
         for(j = i + 1; j < tam; j++){
             comp++; //Conta a quantidade de comparacoes
@@ -139,9 +140,9 @@ void selectionsort(ListaPala *lp){
         strcpy(vet[min].item, vet[i].item);
         strcpy(vet[i].item, aux.item);
         mov++; //Conta a quantidade de mivimentacoes
-    }
+    }*/
 
-    /*for(i=0;i<tam;i++){
+    for(i=0;i<tam;i++){
         min=i;
         for(j=i+1;j<tam;j++){
             while(vet[min].item[p] == vet[j].item[p] && (vet[min].item[p] && vet[j].item[p])) p++;
@@ -152,7 +153,7 @@ void selectionsort(ListaPala *lp){
         aux=vet[min];
         vet[min] = vet[i];
         vet[i] = aux;
-    }*/
+    }
     end = clock();
 
     printf("\nselectionsort:\n");
