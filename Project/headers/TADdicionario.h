@@ -51,4 +51,6 @@ void ordena_lista(lista_letra *lista,char *palavra,int escolha);
 //trasporta informacao para as funcoes de ordenacao
 void trasportsort(lista_letra *lista,celula_letra *letra, char *palavra,int escolha);
 
+void Arquivos(void);
+
 #endif

@@ -31,7 +31,7 @@ void bubblesort(ListaPala *lp){
     double time;
     start = clock();
     
-    /*for(int a = 0; a < tam; a++){//Bobble_sort
+    for(int a = 0; a < tam; a++){//Bobble_sort
         for(int j = a+1; j < tam; j++){
             comp++;
             if(strcmp(vet[a].item, vet[j].item) > 0){ //0 se forem iguais, <0 se st1<st2 e >0 se st1>st2.
@@ -41,9 +41,9 @@ void bubblesort(ListaPala *lp){
                 mov += 2;
             }
         }
-    }*/
+    }
 
-    for(i=0;i<tam;i++){
+    /*for(i=0;i<tam;i++){
         for(j=0;j<tam;j++){
             while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p])) p++;
 
@@ -56,7 +56,7 @@ void bubblesort(ListaPala *lp){
                 mov++; //Conta o número de movimentações
             }p=1;
         }
-    }
+    }*/
 
     end = clock();
     
@@ -83,7 +83,7 @@ void insertionsort(ListaPala *lp){
 
     start = clock();
 
-    /*for(i = 1; i <= tam; i++){
+    for(i = 1; i <= tam; i++){
         strcpy(aux.item, vet[i].item);
         j = i-1;
         while(j >= 0 && strcmp(aux.item, vet[j].item) < 0){
@@ -93,9 +93,9 @@ void insertionsort(ListaPala *lp){
         }
         strcpy(vet[j+1].item, aux.item);
         mov++;
-    }*/
+    }
 
-    for(i=1;i<tam;i++){
+    /*for(i=1;i<tam;i++){
         aux = vet[i];
         j=i-1;
         while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
@@ -107,7 +107,7 @@ void insertionsort(ListaPala *lp){
         }p=1;
 
         vet[j+1] = aux;
-    }
+    }*/
     end = clock();
 
     printf("\ninsertionsort:\n");
@@ -133,7 +133,7 @@ void selectionsort(ListaPala *lp){
 
     start = clock();
 
-    /*for(i = 0; i < tam; i++){ //select_sort
+    for(i = 0; i < tam; i++){ //selection_sort
         min = i;
         for(j = i + 1; j < tam; j++){
             comp++; //Conta a quantidade de comparacoes
@@ -143,9 +143,9 @@ void selectionsort(ListaPala *lp){
         strcpy(vet[min].item, vet[i].item);
         strcpy(vet[i].item, aux.item);
         mov++; //Conta a quantidade de mivimentacoes
-    }*/
+    }
 
-    for(i=0;i<tam;i++){
+    /*for(i=0;i<tam;i++){
         min=i;
         for(j=i+1;j<tam;j++){
             while(vet[min].item[p] == vet[j].item[p] && (vet[min].item[p] && vet[j].item[p])) p++;
@@ -156,7 +156,7 @@ void selectionsort(ListaPala *lp){
         aux=vet[min];
         vet[min] = vet[i];
         vet[i] = aux;
-    }
+    }*/
     end = clock();
 
     printf("\nselectionsort:\n");
@@ -244,7 +244,7 @@ void Heapsort(ListaPala *lp){
     }
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("tempo de execuçao: %f\n",time);
+    printf("Tempo de execuçao: %f\n",time);
 }
 //---------------------------------------------------------------------------------------------------------
 
@@ -252,7 +252,7 @@ void Heapsort(ListaPala *lp){
 void shellsort(ListaPala *lp){
     clock_t start, end;
 
-    int h,i,var,j,p=1;
+    int h, i, var, j ,p=1, comp=0, mov=0;
     int tam = lp->nroElem;
     double time;
     TPalavra aux;
@@ -261,8 +261,29 @@ void shellsort(ListaPala *lp){
     copiaparaodernar(lp,vet);
     
     start = clock();
-    
-        while(h<tam){
+
+        h = 1;
+        while(h < tam/3){ //Shell_sort
+            h = 3 * h + 1;
+        }
+
+        while(h > 0){
+            for(i = h; i < tam; i++){
+                strcpy(aux.item, vet[i].item); mov++;
+                j = i - h;
+                while(j >= 0 && strcmp(vet[j].item, aux.item) > 0){//0 se forem iguais, <0 se st1<st2 e >0 se st1>st2.
+                    comp++;
+                    strcpy(vet[j+h].item, vet[j].item);
+
+                    j -= h;
+                }
+                strcpy(vet[j + h].item, aux.item); mov++;
+            }//h /= 2;
+
+            h = (h-1)/3;
+        }
+
+        /*while(h<tam){
             h=h*3+1;
         }
 
@@ -288,7 +309,7 @@ void shellsort(ListaPala *lp){
                 p=1;
                 vet[j] = aux;
             } 
-        }while(h != 1);
+        }while(h != 1);*/
     end = clock();
         
 
@@ -296,7 +317,8 @@ void shellsort(ListaPala *lp){
     imprimir(vet, tam);
 
     time = (double)(end - start) /CLOCKS_PER_SEC;
-    printf("tempo de execução: %f\n",time);
+    printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
+    printf("Tempo de execução: %f\n",time);
     
     return;
 }

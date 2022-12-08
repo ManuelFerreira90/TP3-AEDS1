@@ -254,3 +254,7 @@ void trasportsort(lista_letra *lista, celula_letra *letra, char *palavra, int es
         printf("\nItem nao encontrado.\n");
     }
 }
+
+void Arquivos(){ //Nomes dos arquivos
+    printf("Arquivos:\n\tteste_01.txt\tteste_02.txt\tteste_03.txt\n\n");
+}

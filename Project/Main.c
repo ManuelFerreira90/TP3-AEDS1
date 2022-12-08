@@ -19,13 +19,10 @@ int main(){
     
     char linha_texto[100],pala[10];
     char *palavra;
-    char l;
+    char l, nome_arq[100], nome[20];
 
     celula_letra *auxptr;
     celula_letra *aux1;
-
-    FILE *TXTptr;
-    TXTptr = fopen("texto.txt", "r");
 
 
     inicia_lista_letra(&letras);
@@ -48,10 +45,20 @@ int main(){
             case 0:
                 break;
             case 1:
-                printf("Lendo arquivo de texto.\n\n");
+
+                strcpy(nome_arq, "./Arquivos-teste/");
+                Arquivos();
+                printf("Digite o nome do arquivo: ");
+                scanf("%s", nome); //Lendo nome do arquivo
+                strcat(nome_arq, nome);
+
+                FILE *TXTptr;
+                TXTptr = fopen(nome_arq, "r");
+
+                printf("\nLendo arquivo de texto.\n\n");
                 printf("...\n\n");
                 if(TXTptr == NULL){
-                    printf("Arquivo nao pode ser aberto.\n");
+                    printf("Arquivo nao pode ser aberto.\n"); 
                     exit (0);
                 }
                 else{
@@ -84,7 +91,7 @@ int main(){
                 }
                 fclose(TXTptr);
                 Constroi_vetor(&letras,&lista);
-                printf("Leitura realizada com sucesso.\n\n");
+                printf("Leitura realizada com sucesso.\n");
                 break;
             case 2:
                     printf("Digite a palavra para verificar: ");
@@ -157,16 +164,17 @@ int main(){
             case 9:
                 printf("-----------------------------------------------\n"
                        "Digite 0 para ordenar toda a lista\n"
-                       "Ou \nDigite a letra da lista que deseja ordenar\n"
+                       "                OU"
+                       "\nDigite a letra da lista que deseja ordenar\n"
                        "-----------------------------------------------\n");
                 scanf("%s",pala);
                 
                 printf(
               "\n-----------------------------------\n"
                 "Menu de ordenacao:\n"
-                "1 - bubblesort       4 - heapsort\n"
-                "2 - insertionsort    5 - shellsort\n"
-                "3 - selectionsort    6 - quicksort\n"
+                "1 - Bubble_sort       4 - Heap_sort\n"
+                "2 - Insertion_sort    5 - Shell_sort\n"
+                "3 - Selection_sort    6 - Quick_sort\n"
                 "-----------------------------------\n"
                 "Digite um numero: ");
                 scanf("%d",&escolha2);
