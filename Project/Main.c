@@ -24,6 +24,7 @@ int main(){
     celula_letra *auxptr;
     celula_letra *aux1;
 
+    FILE *TXTptr;
 
     inicia_lista_letra(&letras);
 
@@ -45,9 +46,9 @@ int main(){
             case 0:
                 break;
             case 1:
-
                 strcpy(nome_arq, "./Arquivos-teste/");
                 Arquivos();
+
                 printf("Digite o nome do arquivo: ");
                 scanf("%s", nome); //Lendo nome do arquivo
                 strcat(nome_arq, nome);
@@ -162,6 +163,11 @@ int main(){
                 break;
             
             case 9:
+                if(TXTptr == NULL){
+                    printf("Arquivo nao foi lido.\n"); 
+                    break;
+                }
+
                 printf("-----------------------------------------------\n"
                        "Digite 0 para ordenar toda a lista\n"
                        "                OU"

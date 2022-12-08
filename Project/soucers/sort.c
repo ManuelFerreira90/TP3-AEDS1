@@ -169,43 +169,43 @@ void selectionsort(ListaPala *lp){
 //---------------------------------------------------------------------------------------------------------
 
 //----------------------------------------heap sort-------------------------------------------------------
-void Refaz(int Esq, int Dir, TPalavra *vet){
+void Refaz(int Esq, int Dir, TPalavra *vet, int *comp, int *mov){
     int p = 1;
     int j = Esq * 2;
     TPalavra aux = vet[Esq];
 
     while (j <= Dir){
         while(vet[j].item[p] == vet[j+1].item[p] && (vet[j].item[p] && vet[j+1].item[p]))p++;
-        if ((j < Dir)&&(vet[j].item[p] < vet[j+1].item[p])) j++;
-        
+        if ((j < Dir)&&(vet[j].item[p] < vet[j+1].item[p]))j++;
+        *comp += 1;
+
         p=1;
         while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
         if (aux.item[p] >= vet[j].item[p]) break;
-        
+        *comp += 1;
+
         p=1;
         
-        vet[Esq] = vet[j];
+        vet[Esq] = vet[j]; *mov += 1;
         Esq = j; j = Esq * 2 ;
 
     }
     vet[Esq] = aux;
 }
 
-void Constroi(TPalavra *vet, int *n){
+void Constroi(TPalavra *vet, int *n, int *comp, int *mov){
     int Esq;
     Esq = *n / 2 + 1;
     while (Esq > 1){
         Esq--;
-        Refaz(Esq, *n, vet);
+        Refaz(Esq, *n, vet, comp, mov);
     }
 }
-
-
 
 void Heapsort(ListaPala *lp){ 
     clock_t start, end;
     double time;
-    int Esq, Dir,i;
+    int Esq, Dir, i, comp, mov;
     int tam = lp->nroElem;
     TPalavra aux;
 
@@ -225,13 +225,13 @@ void Heapsort(ListaPala *lp){
 //************************************************************************
     
     start = clock();
-    Constroi(vet, &tam); /* constroi o heap */
+    Constroi(vet, &tam, &comp, &mov); /* constroi o heap */
     Esq = 1; Dir = tam;
     
     while (Dir > 1){ /* ordena o vetor */
         aux = vet[1]; vet[1] = vet[Dir]; vet[Dir] = aux;
         Dir--;
-        Refaz(Esq, Dir, vet);
+        Refaz(Esq, Dir, vet, &comp, &mov);
     }
     end = clock();
 
@@ -244,6 +244,7 @@ void Heapsort(ListaPala *lp){
     }
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("\nNumero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execuçao: %f\n",time);
 }
 //---------------------------------------------------------------------------------------------------------
@@ -325,7 +326,7 @@ void shellsort(ListaPala *lp){
 //--------------------------------------------------------------------------------------------------------
 
 //----------------------------quicksort------------------------------------------------------------------- 
-void particaoQ(int esq, int dir, int *i, int *j,TPalavra *vet){
+void particaoQ(int esq, int dir, int *i, int *j,TPalavra *vet, int *comp, int *mov){
     int p=1;
     TPalavra pivo,aux;
     *i = esq; *j = dir;
@@ -346,25 +347,26 @@ void particaoQ(int esq, int dir, int *i, int *j,TPalavra *vet){
             while(vet[*j].item[p] == pivo.item[p] && (vet[*j].item[p] && pivo.item[p])) p++;
             }p=1;
         
+        *comp += 1;
         if (*i <= *j){
             aux = vet[*i]; 
             vet[*i] = vet[*j]; 
             vet[*j] = aux;
             (*i)++; (*j)--;
-            
+            *mov += 1;
         }
         
     }while (*i <= *j);
 }
 
 
-void ordenaQ(int esq, int dir, TPalavra *vet){
+void ordenaQ(int esq, int dir, TPalavra *vet, int *comp, int *mov){
     int i,j;
 
-    particaoQ(esq,dir,&i,&j,vet);
+    particaoQ(esq,dir,&i,&j,vet, comp, mov);
 
-    if(esq < j)ordenaQ(esq,j,vet);
-    if(i < dir)ordenaQ(i,dir,vet);
+    if(esq < j)ordenaQ(esq, j, vet, comp, mov);
+    if(i < dir)ordenaQ(i, dir, vet, comp, mov);
 }
 
 
@@ -372,18 +374,20 @@ void quicksort(ListaPala *lp){
     clock_t start,end;
     double time;
     int tam = lp->nroElem;
+    int comp, mov;
     
     TPalavra vet[tam];
     copiaparaodernar(lp,vet);
 
     start = clock();
-    ordenaQ(0,tam-1,vet);
+    ordenaQ(0,tam-1,vet, &comp, &mov);
     end = clock();
 
     printf("\nQuick_sort:\n");
     imprimir(vet,tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execução: %f",time);
 }
 //----------------------------------------------------------------------------------------------------------
