@@ -60,7 +60,7 @@ void bubblesort(ListaPala *lp){
 
     end = clock();
     
-    printf("\nBubble_sort:\n");
+    printf("\nbubblesort:\n");
     imprimir(vet, tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
@@ -110,12 +110,12 @@ void insertionsort(ListaPala *lp){
     }*/
     end = clock();
 
-    printf("\nInsertion_sort:\n");
+    printf("\ninsertionsort:\n");
     imprimir(vet, tam+1);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
-    printf("Tempo de execução: %f\n",time);
+    printf("tempo de execução: %f\n",time);
 }
 //---------------------------------------------------------------------------------------------------------
 
@@ -159,12 +159,12 @@ void selectionsort(ListaPala *lp){
     }*/
     end = clock();
 
-    printf("\nSelection_sort:\n");
+    printf("\nselectionsort:\n");
     imprimir(vet, tam);
     
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
-    printf("Tempo de execução: %f\n",time);
+    printf("tempo de execução: %f\n",time);
 }
 //---------------------------------------------------------------------------------------------------------
 
@@ -235,7 +235,7 @@ void Heapsort(ListaPala *lp){
     }
     end = clock();
 
-    printf("\nHeap_sort:\n");
+    printf("\nHeapsort:\n");
     printf("-------------------------\n"
             "%c\n"
             "-------------------------\n", vet[1].item[0]);
@@ -313,7 +313,7 @@ void shellsort(ListaPala *lp){
     end = clock();
         
 
-    printf("\nShell_sort:\n");
+    printf("\nshellsort:\n");
     imprimir(vet, tam);
 
     time = (double)(end - start) /CLOCKS_PER_SEC;
@@ -380,10 +380,10 @@ void quicksort(ListaPala *lp){
     ordenaQ(0,tam-1,vet);
     end = clock();
 
-    printf("\nQuick_sort:\n");
+    printf("\nQicksort:\n");
     imprimir(vet,tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de execução: %f",time);
+    printf("tempo de execução: %f",time);
 }
 //----------------------------------------------------------------------------------------------------------
