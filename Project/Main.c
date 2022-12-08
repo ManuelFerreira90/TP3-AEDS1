@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../Project/headers/TADdicionario.h"
-#include "../Project/headers/TADpalavra.h"
-#include "../Project/headers/TADlinha.h"
+#include "headers/TADdicionario.h"
+#include "headers/TADpalavra.h"
+#include "headers/TADlinha.h"
 
 int main(){
     lista_letra letras;
@@ -14,7 +14,7 @@ int main(){
     Tlista linha;
     Titem item;
 
-    int escolha, result;
+    int escolha, escolha2, result;
     int cont = 1, i;
     
     char linha_texto[100],pala[10];
@@ -31,14 +31,22 @@ int main(){
     inicia_lista_letra(&letras);
 
 
-    while(escolha != 9){
+    while(escolha != 10){
 
-        InstrucoesLP(); //exibe menu de escolhas
+        if(escolha == 0)InstrucoesLP(); //exibe menu de escolhas
+        if(escolha != 0){
+            printf("\n-------------------------------------\n");
+            printf("Digite 0 caso queira ver o menu\n");
+            printf("-------------------------------------\n");
+        }
+        
         printf("Escolha uma opcao: ");
         scanf("%d",&escolha);
         printf("\n");
 
         switch(escolha){
+            case 0:
+                break;
             case 1:
                 printf("Lendo arquivo de texto.\n\n");
                 printf("...\n\n");
@@ -66,7 +74,6 @@ int main(){
                                 }
                                 palavra = palavraaux;
                             }
-                            //
 
                             verifica_letra(&letras, let, palavra,cont);
                             palavra = strtok(NULL, " "); //Passa para a proxima palavra
@@ -76,9 +83,8 @@ int main(){
                     }
                 }
                 fclose(TXTptr);
+                Constroi_vetor(&letras,&lista);
                 printf("Leitura realizada com sucesso.\n\n");
-                printf("\n");
-                copiaparaodernar(&letras);
                 break;
             case 2:
                     printf("Digite a palavra para verificar: ");
@@ -147,18 +153,61 @@ int main(){
                     printf("\nLista vazia.\n");
                 }
                 break;
-
+            
             case 9:
+                printf("-----------------------------------------------\n"
+                       "Digite 0 para ordenar toda a lista\n"
+                       "Ou \nDigite a letra da lista que deseja ordenar\n"
+                       "-----------------------------------------------\n");
+                scanf("%s",pala);
+                
+                printf(
+              "\n-----------------------------------\n"
+                "Menu de ordenacao:\n"
+                "1 - bubblesort       4 - heapsort\n"
+                "2 - insertionsort    5 - shellsort\n"
+                "3 - selectionsort    6 - quicksort\n"
+                "-----------------------------------\n"
+                "Digite um numero: ");
+                scanf("%d",&escolha2);
+                if(pala[0] == '0'){
+                    ordena_lista(&letras,pala,escolha2);
+                }else{
+                    switch(escolha2){
+                        case 1:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                        
+                        case 2:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
 
-                printf("Finalizando ...\n");
+                        case 3:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                        
+                        case 4:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                        
+                        case 5:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                        case 6:
+                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            break;
+                    }
+                    break;
+                case 10:
+                    printf("Finalizando ...\n");
 
-                break;
+                    break;
+                default:
 
-            default:
+                    printf("Escolha invalida.\n\n");
 
-                printf("Escolha invalida.\n\n");
-
-                break;
+                    break;
+            }
         }
 
     }
