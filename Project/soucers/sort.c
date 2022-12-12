@@ -60,7 +60,7 @@ void bubblesort(ListaPala *lp){
 
     end = clock();
     
-    printf("\nbubblesort:\n");
+    printf("\nBubblesort:\n");
     imprimir(vet, tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
@@ -110,7 +110,7 @@ void insertionsort(ListaPala *lp){
     }*/
     end = clock();
 
-    printf("\ninsertionsort:\n");
+    printf("\nInsertionsort:\n");
     imprimir(vet, tam+1);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
@@ -159,7 +159,7 @@ void selectionsort(ListaPala *lp){
     }*/
     end = clock();
 
-    printf("\nselectionsort:\n");
+    printf("\nSelectionsort:\n");
     imprimir(vet, tam);
     
     time = (double)(end - start) / CLOCKS_PER_SEC;
@@ -314,7 +314,7 @@ void shellsort(ListaPala *lp){
     end = clock();
         
 
-    printf("\nshellsort:\n");
+    printf("\nShellsort:\n");
     imprimir(vet, tam);
 
     time = (double)(end - start) /CLOCKS_PER_SEC;
@@ -383,7 +383,7 @@ void quicksort(ListaPala *lp){
     ordenaQ(0,tam-1,vet, &comp, &mov);
     end = clock();
 
-    printf("\nQicksort:\n");
+    printf("\nQuicksort:\n");
     imprimir(vet,tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
