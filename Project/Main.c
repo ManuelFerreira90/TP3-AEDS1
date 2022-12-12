@@ -10,7 +10,7 @@ int main(){
     letra let;
     ListaPala lista;
     TPalavra obj;
-
+    media i_media;
     Tlista linha;
     Titem item;
 
@@ -25,8 +25,6 @@ int main(){
     celula_letra *aux1;
 
     FILE *TXTptr;
-
-    inicia_lista_letra(&letras);
 
 
     while(escolha != 10){
@@ -46,6 +44,8 @@ int main(){
             case 0:
                 break;
             case 1:
+                free(letras.primeiro);
+                inicia_lista_letra(&letras);
                 strcpy(nome_arq, "./Arquivos-teste/");
                 Arquivos();
 
@@ -64,6 +64,7 @@ int main(){
                 }
                 else{
                    while(fgets(linha_texto, 100, TXTptr) != NULL){
+                        i_media.cont++;
                         palavra = strtok(linha_texto, " "); //Esta separando cada palavra da linha
 
                         while(palavra){
@@ -185,30 +186,30 @@ int main(){
                 "Digite um numero: ");
                 scanf("%d",&escolha2);
                 if(pala[0] == '0'){
-                    ordena_lista(&letras,pala,escolha2);
+                    ordena_lista(&letras,pala,escolha2, &i_media);
                 }else{
                     switch(escolha2){
                         case 1:
-                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            trasportsort(&letras,letras.utimo,pala,escolha2, &i_media);
                             break;
                         
                         case 2:
-                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            trasportsort(&letras,letras.utimo,pala,escolha2, &i_media);
                             break;
 
                         case 3:
-                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            trasportsort(&letras,letras.utimo,pala,escolha2, &i_media);
                             break;
                         
                         case 4:
-                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            trasportsort(&letras,letras.utimo,pala,escolha2, &i_media);
                             break;
                         
                         case 5:
-                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            trasportsort(&letras,letras.utimo,pala,escolha2, &i_media);
                             break;
                         case 6:
-                            trasportsort(&letras,letras.utimo,pala,escolha2);
+                            trasportsort(&letras,letras.utimo,pala,escolha2, &i_media);
                             break;
                     }
                     break;
