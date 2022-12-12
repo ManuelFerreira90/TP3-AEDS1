@@ -1,5 +1,5 @@
 typedef struct{
-    int media_c;
-    int media_m;
-    int cont;
+    float media_c;
+    float media_m;
+    float cont;
 }media;

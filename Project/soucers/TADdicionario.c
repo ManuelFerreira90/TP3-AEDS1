@@ -207,11 +207,11 @@ void ordena_lista(lista_letra *lista,char *palavra,int escolha, media *v_media){
     printf("\n--------------------------------------------\n");
     printf("Tempo de execucao total: %f seg\n",time);
     printf("--------------------------------------------\n");
-    printf("Media do tempo de execucao: %f seg\n",time/v_media->cont);
+    printf("Media do tempo de execucao: %.2f seg\n",time/v_media->cont);
     printf("--------------------------------------------\n");
-    printf("Media de comparacoes: %d\n",v_media->media_c/v_media->cont);
+    printf("Media de comparacoes: %.2f\n",v_media->media_c/v_media->cont);
     printf("--------------------------------------------\n");
-    printf("Media de movimentacoes: %d\n",v_media->media_m/v_media->cont);
+    printf("Media de movimentacoes: %.2f\n",v_media->media_m/v_media->cont);
     printf("--------------------------------------------\n");
 
     
