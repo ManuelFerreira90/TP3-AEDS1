@@ -165,12 +165,12 @@ int main(){
             
             case 9:
                 if(TXTptr == NULL){
-                    printf("Arquivo nao foi lido.\n"); 
+                    printf("Infelizmente o arquivo não foi lido, .\n"); 
                     break;
                 }
 
                 printf("-----------------------------------------------\n"
-                       "Digite 0 para ordenar toda a lista\n"
+                       "Digite '0' para ordenar toda a lista\n"
                        "                OU"
                        "\nDigite a letra da lista que deseja ordenar\n"
                        "-----------------------------------------------\n");

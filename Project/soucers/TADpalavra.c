@@ -201,7 +201,7 @@ void InstrucoesLP(void){
     "1 = Ler o arquivo de texto;                           6 = Imprimir a lista de palavras;\n"
     "2 = Procurar se a palavra existe;                     7 = Imprimir palavra desejada e suas linhas;\n"
     "3 = Excluir um elemento especifico da lista;          8 = Imprimir letra especifica;\n"
-    "4 = Excluir um elemento no final da lista;            9 = Ordena lista de letras especifica\n"
+    "4 = Excluir um elemento no final da lista;            9 = Ordenar lista de letras;\n"
     "5 = Exibir quantas palavras existem;                 10 = Finalizar.\n"
     "----------------------------------------------------------------------------------------------------\n"
     );
