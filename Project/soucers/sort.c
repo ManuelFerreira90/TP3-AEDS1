@@ -43,21 +43,6 @@ void bubblesort(ListaPala *lp, media *v_media){
         }
     }
 
-    /*for(i=0;i<tam;i++){
-        for(j=0;j<tam;j++){
-            while(vet[i].item[p] == vet[j].item[p] && (vet[i].item[p] && vet[j].item[p])) p++;
-
-            comp++; //Conta o numero de comparações
-            if(vet[i].item[p] < vet[j].item[p]){
-                
-                aux = vet[i];
-                vet[i] = vet[j];
-                vet[j] = aux;
-                mov++; //Conta o número de movimentações
-            }p=1;
-        }
-    }*/
-
     end = clock();
     
     printf("\nBubblesort:\n");
@@ -98,19 +83,6 @@ void insertionsort(ListaPala *lp, media *v_media){
         mov++;
     }
 
-    /*for(i=1;i<tam;i++){
-        aux = vet[i];
-        j=i-1;
-        while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
-        while(j>=0 && vet[j].item[p] > aux.item[p]){
-            vet[j+1] = vet[j];
-            j--;
-            p=1;
-            while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
-        }p=1;
-
-        vet[j+1] = aux;
-    }*/
     end = clock();
 
     printf("\nInsertionsort:\n");
@@ -118,7 +90,7 @@ void insertionsort(ListaPala *lp, media *v_media){
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
-    printf("tempo de execução: %f\n",time);
+    printf("Tempo de execução: %f seg\n\n",time);
     v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
@@ -151,18 +123,6 @@ void selectionsort(ListaPala *lp, media *v_media){
         mov++; //Conta a quantidade de mivimentacoes
     }
 
-    /*for(i=0;i<tam;i++){
-        min=i;
-        for(j=i+1;j<tam;j++){
-            while(vet[min].item[p] == vet[j].item[p] && (vet[min].item[p] && vet[j].item[p])) p++;
-            if(vet[j].item[p]<vet[min].item[p]) min = j;
-
-            p = 1;
-        }
-        aux=vet[min];
-        vet[min] = vet[i];
-        vet[i] = aux;
-    }*/
     end = clock();
 
     printf("\nSelectionsort:\n");
@@ -170,7 +130,7 @@ void selectionsort(ListaPala *lp, media *v_media){
     
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
-    printf("tempo de execução: %f\n",time);
+    printf("Tempo de execução: %f seg\n\n",time);
     v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
@@ -185,19 +145,22 @@ void Refaz(int Esq, int Dir, TPalavra *vet, int *comp, int *mov){
 
     while (j <= Dir){
         while(vet[j].item[p] == vet[j+1].item[p] && (vet[j].item[p] && vet[j+1].item[p]))p++;
+        
+        *comp += 1;
         if ((j < Dir)&&(vet[j].item[p] < vet[j+1].item[p]))j++;
-        *comp += 1;
-
         p=1;
-        while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
-        if (aux.item[p] >= vet[j].item[p]) break;
-        *comp += 1;
 
+        while(vet[j].item[p] == aux.item[p] && (vet[j].item[p] && aux.item[p]))p++;
+
+        *comp += 1;
+        if (aux.item[p] >= vet[j].item[p]) break;
         p=1;
         
-        vet[Esq] = vet[j]; *mov += 1;
-        Esq = j; j = Esq * 2 ;
+        vet[Esq] = vet[j]; 
+        *mov += 1;
 
+        Esq = j;
+        j = Esq * 2;
     }
     vet[Esq] = aux;
 }
@@ -214,11 +177,12 @@ void Constroi(TPalavra *vet, int *n, int *comp, int *mov){
 void Heapsort(ListaPala *lp, media *v_media){ 
     clock_t start, end;
     double time;
-    int Esq, Dir, i, comp, mov;
+    int Esq, Dir, i, comp = 0, mov = 0;
     int tam = lp->nroElem;
     TPalavra aux;
 
     TPalavra vet[tam+1];
+
 //*************************copia o vetor*********************************   
     int tam1;
     ListaPala *aux1;
@@ -254,10 +218,10 @@ void Heapsort(ListaPala *lp, media *v_media){
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("\nNumero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
-    printf("Tempo de execuçao: %f\n",time);
+    printf("Tempo de execução: %f seg\n\n",time);
     v_media->cont += 1;
-    v_media->media_c+=comp;
-    v_media->media_m+=mov;
+    v_media->media_c += comp;
+    v_media->media_m += mov;
 }
 //---------------------------------------------------------------------------------------------------------
 
@@ -295,34 +259,6 @@ void shellsort(ListaPala *lp, media *v_media){
 
             h = (h-1)/3;
         }
-
-        /*while(h<tam){
-            h=h*3+1;
-        }
-
-        do{
-            if(tam == 1)break;
-            h = h / 3;
-            for(i=h;i<tam;i++){
-                aux = vet[i];
-                j = i;
-
-
-                while(vet[j-h].item[p] == aux.item[p] && (vet[j-h].item[p] && aux.item[p])) p++; 
-                
-                while(vet[j-h].item[p] > aux.item[p]){  
-                    vet[j] = vet[j-h];
-                    j = j-h;
-                    
-                    p=1;
-                    while(vet[j-h].item[p] == aux.item[p] && (vet[j-h].item[p] && aux.item[p])) p++;
-                    
-                    if(j < h)break;
-                }
-                p=1;
-                vet[j] = aux;
-            } 
-        }while(h != 1);*/
     end = clock();
         
 
@@ -331,7 +267,7 @@ void shellsort(ListaPala *lp, media *v_media){
 
     time = (double)(end - start) /CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
-    printf("Tempo de execução: %f\n",time);
+    printf("Tempo de execução: %f seg\n\n",time);
     v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
@@ -388,7 +324,7 @@ void quicksort(ListaPala *lp, media *v_media){
     clock_t start,end;
     double time;
     int tam = lp->nroElem;
-    int comp, mov;
+    int comp = 0, mov = 0;
     
     TPalavra vet[tam];
     copiaparaodernar(lp,vet);
@@ -404,7 +340,7 @@ void quicksort(ListaPala *lp, media *v_media){
 
 
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
-    printf("Tempo de execução: %f",time);
+    printf("Tempo de execução: %f seg\n\n",time);
     v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;

@@ -201,7 +201,7 @@ void ordena_lista(lista_letra *lista,char *palavra,int escolha, media *v_media){
     }
     end = clock();
 
-    printf("\nTotal de comparacoes: %d\nTtal de movimentacoes: %d\nNumero total de letra: %d\n", v_media->media_c, v_media->media_m, v_media->cont);
+    printf("\nTotal de comparacoes: %d\nTotal de movimentacoes: %d\nNumero total de letra: %d\n", v_media->media_c, v_media->media_m, v_media->cont);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("\n--------------------------------------------\n");
