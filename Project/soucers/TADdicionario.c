@@ -184,28 +184,36 @@ void trasport(lista_letra *lista,char *palavra,int escolha){
 }
 
 //ordena toda lista
-void ordena_lista(lista_letra *lista,char *palavra,int escolha){
+void ordena_lista(lista_letra *lista,char *palavra,int escolha, media *v_media){
     clock_t start, end;
     double time;
     celula_letra *aux = lista->primeiro->prox;
 
     start = clock();
     while(aux){
-        trasportsort(lista,aux,palavra,escolha);
+        trasportsort(lista,aux,palavra,escolha,v_media);
         aux = aux->prox;
     }
     end = clock();
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf(
-        "\n-------------------------------------------\n"
+        "\n--------------------------------------------\n"
         "tempo de execucao total: %f seg\n"
-        "-------------------------------------------\n",time);
+        "--------------------------------------------\n"
+        "media do tempo de execucao: %f seg\n"
+        "--------------------------------------------\n"
+        "media de comparacoes: %d\n"
+        "--------------------------------------------\n"
+        "media de movimentacoes: %d\n",time, time/v_media->cont, v_media->media_c/v_media->cont, v_media->media_m/v_media->cont);
+    v_media->cont=0;
+    v_media->media_c=0;
+    v_media->media_m=0;
 }
 
 
 //trasporta informacao para as funcoes de ordenacao
-void trasportsort(lista_letra *lista, celula_letra *letra, char *palavra, int escolha){
+void trasportsort(lista_letra *lista, celula_letra *letra, char *palavra, int escolha, media *v_media){
     int cont = 0;
     celula_letra *aux ;
 
@@ -227,27 +235,27 @@ void trasportsort(lista_letra *lista, celula_letra *letra, char *palavra, int es
     if(aux->prox != NULL || cont != 0){
         switch(escolha){
             case 1:
-                bubblesort(aux->Letra.Pala);
+                bubblesort(aux->Letra.Pala, v_media);
                 break;
             
             case 2:
-                insertionsort(aux->Letra.Pala);
+                insertionsort(aux->Letra.Pala, v_media);
                 break;
 
             case 3:
-                selectionsort(aux->Letra.Pala);
+                selectionsort(aux->Letra.Pala, v_media);
                 break;
 
             case 4:
-                Heapsort(aux->Letra.Pala);
+                Heapsort(aux->Letra.Pala, v_media);
                 break;
             
             case 5:
-                shellsort(aux->Letra.Pala);
+                shellsort(aux->Letra.Pala, v_media);
                 break;
             
             case 6:
-                quicksort(aux->Letra.Pala);
+                quicksort(aux->Letra.Pala, v_media);
                 break;
         }
     }else{

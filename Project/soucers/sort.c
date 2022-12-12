@@ -18,7 +18,7 @@ void imprimir(TPalavra *v, int tam){
 }
 
 //---------------------------------------bubble sort-----------------------------------------------------
-void bubblesort(ListaPala *lp){
+void bubblesort(ListaPala *lp, media *v_media){
     clock_t start, end;
 
     int i, j, p=1, comp=0, mov=0;
@@ -66,11 +66,13 @@ void bubblesort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execução: %f seg\n\n",time);
+    v_media->media_c+=comp;
+    v_media->media_m+=mov;
 }
 //----------------------------------------------------------------------------------------------------------
 
 //---------------------------------------insertion sort----------------------------------------------------
-void insertionsort(ListaPala *lp){
+void insertionsort(ListaPala *lp, media *v_media){
     clock_t start, end;
 
     int i, j, p=1, comp=0, mov=0;
@@ -116,11 +118,13 @@ void insertionsort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("tempo de execução: %f\n",time);
+    v_media->media_c+=comp;
+    v_media->media_m+=mov;
 }
 //---------------------------------------------------------------------------------------------------------
 
 //-------------------------------------selection sort-----------------------------------------------------
-void selectionsort(ListaPala *lp){
+void selectionsort(ListaPala *lp, media *v_media){
     clock_t start, end;
 
     int i, j, p=1, min, comp=0, mov=0;
@@ -165,6 +169,8 @@ void selectionsort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("tempo de execução: %f\n",time);
+    v_media->media_c+=comp;
+    v_media->media_m+=mov;
 }
 //---------------------------------------------------------------------------------------------------------
 
@@ -202,7 +208,7 @@ void Constroi(TPalavra *vet, int *n, int *comp, int *mov){
     }
 }
 
-void Heapsort(ListaPala *lp){ 
+void Heapsort(ListaPala *lp, media *v_media){ 
     clock_t start, end;
     double time;
     int Esq, Dir, i, comp, mov;
@@ -246,11 +252,13 @@ void Heapsort(ListaPala *lp){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("\nNumero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execuçao: %f\n",time);
+    v_media->media_c+=comp;
+    v_media->media_m+=mov;
 }
 //---------------------------------------------------------------------------------------------------------
 
 //------------------------------------shell sort---------------------------------------------------------- 
-void shellsort(ListaPala *lp){
+void shellsort(ListaPala *lp, media *v_media){
     clock_t start, end;
 
     int h, i, var, j ,p=1, comp=0, mov=0;
@@ -320,7 +328,8 @@ void shellsort(ListaPala *lp){
     time = (double)(end - start) /CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execução: %f\n",time);
-    
+    v_media->media_c+=comp;
+    v_media->media_m+=mov;
     return;
 }
 //--------------------------------------------------------------------------------------------------------
@@ -370,7 +379,7 @@ void ordenaQ(int esq, int dir, TPalavra *vet, int *comp, int *mov){
 }
 
 
-void quicksort(ListaPala *lp){
+void quicksort(ListaPala *lp, media *v_media){
     clock_t start,end;
     double time;
     int tam = lp->nroElem;
@@ -391,5 +400,7 @@ void quicksort(ListaPala *lp){
 
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execução: %f",time);
+    v_media->media_c+=comp;
+    v_media->media_m+=mov;
 }
 //----------------------------------------------------------------------------------------------------------
