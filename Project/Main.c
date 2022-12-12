@@ -14,7 +14,7 @@ int main(){
     Tlista linha;
     Titem item;
 
-    int escolha, escolha2, result;
+    int escolha = 0, escolha2, result;
     int cont = 1, i;
     
     char linha_texto[100],pala[10];

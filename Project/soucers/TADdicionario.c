@@ -190,25 +190,31 @@ void ordena_lista(lista_letra *lista,char *palavra,int escolha, media *v_media){
     celula_letra *aux = lista->primeiro->prox;
 
     start = clock();
+
+    v_media->cont = 0;
+    v_media->media_c = 0;
+    v_media->media_m = 0;
+
     while(aux){
         trasportsort(lista,aux,palavra,escolha,v_media);
         aux = aux->prox;
     }
     end = clock();
 
+    printf("\nTotal de comparacoes: %d\nTtal de movimentacoes: %d\nNumero total de letra: %d\n", v_media->media_c, v_media->media_m, v_media->cont);
+
     time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf(
-        "\n--------------------------------------------\n"
-        "tempo de execucao total: %f seg\n"
-        "--------------------------------------------\n"
-        "media do tempo de execucao: %f seg\n"
-        "--------------------------------------------\n"
-        "media de comparacoes: %d\n"
-        "--------------------------------------------\n"
-        "media de movimentacoes: %d\n",time, time/v_media->cont, v_media->media_c/v_media->cont, v_media->media_m/v_media->cont);
-    v_media->cont=0;
-    v_media->media_c=0;
-    v_media->media_m=0;
+    printf("\n--------------------------------------------\n");
+    printf("Tempo de execucao total: %f seg\n",time);
+    printf("--------------------------------------------\n");
+    printf("Media do tempo de execucao: %f seg\n",time/v_media->cont);
+    printf("--------------------------------------------\n");
+    printf("Media de comparacoes: %d\n",v_media->media_c/v_media->cont);
+    printf("--------------------------------------------\n");
+    printf("Media de movimentacoes: %d\n",v_media->media_m/v_media->cont);
+    printf("--------------------------------------------\n");
+
+    
 }
 
 

@@ -66,6 +66,7 @@ void bubblesort(ListaPala *lp, media *v_media){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execução: %f seg\n\n",time);
+    v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
 }
@@ -113,11 +114,12 @@ void insertionsort(ListaPala *lp, media *v_media){
     end = clock();
 
     printf("\nInsertionsort:\n");
-    imprimir(vet, tam+1);
+    imprimir(vet, tam);
 
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("tempo de execução: %f\n",time);
+    v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
 }
@@ -169,6 +171,7 @@ void selectionsort(ListaPala *lp, media *v_media){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("tempo de execução: %f\n",time);
+    v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
 }
@@ -252,6 +255,7 @@ void Heapsort(ListaPala *lp, media *v_media){
     time = (double)(end - start) / CLOCKS_PER_SEC;
     printf("\nNumero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execuçao: %f\n",time);
+    v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
 }
@@ -328,6 +332,7 @@ void shellsort(ListaPala *lp, media *v_media){
     time = (double)(end - start) /CLOCKS_PER_SEC;
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execução: %f\n",time);
+    v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
     return;
@@ -400,6 +405,7 @@ void quicksort(ListaPala *lp, media *v_media){
 
     printf("Numero de comparacoes: %d\nNumero de movimentacoes: %d\n", comp, mov);
     printf("Tempo de execução: %f",time);
+    v_media->cont += 1;
     v_media->media_c+=comp;
     v_media->media_m+=mov;
 }
